@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Web Application</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="search-container">
+            <h1>Get Live Weather Updates</h1>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for a location">
+                <button id="search-button">Search</button>
+            </div>
+            <p style="display: none;">No locations found</p>
+            <ul class="search-results" style="display: none;"></ul>
+        </div>
+
+        <div class="weather-details" style="display:none;">
+            <div class="location">
+                <p id="updateTime"></p>
+                <h2 id="currentLocation"></h2>
+                <div class="weather-info">
+                    <img alt="Weather Icon" id="weatherIcon">
+                    <div class="mainTempContainer">
+                        <p id="currentTemp"></p>
+                    </div>
+                    <div id="currentDesc"></div>
+                </div>
+                <div class="additional-weather-info">
+                    <p id="tempDesc"></p>
+                </div>
+
+                <div class="table-details" id="additionalDetails">
+                    <div class="item">
+                        <p class="item-heading">Sun</p>
+                        <p class="item-data" id="sun"></p>
+                    </div>
+                    <div class="item">
+                        <p class="item-heading">Clouds</p>
+                        <p class="item-data" id="clouds"></p>
+                    </div>
+                    <div class="item">
+                        <p class="item-heading">Wind</p>
+                        <p class="item-data" id="wind"></p>
+                    </div>
+                    <div class="item">
+                        <p class="item-heading">Humidity</p>
+                        <p class="item-data" id="humidity"></p>
+                    </div>
+                    <div class="item">
+                        <p class="item-heading">Visibility</p>
+                        <p class="item-data" id="visibility"></p>
+                    </div>
+                    <div class="item">
+                        <p class="item-heading">Pressure</p>
+                        <p class="item-data" id="pressure"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-details" id="forecastDetails"></div>
+
+        </div>
+
+        <p class="footer">Powered by OpenWeatherMap</p>
+    </div>
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
