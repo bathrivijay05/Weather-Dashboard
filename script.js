@@ -6,7 +6,6 @@ const weatherContainer = document.querySelector('.weather-details');
 const searchInput = document.querySelector('.search-bar input');
 const searchButton = document.querySelector('#search-button');
 const searchBarInfo = document.querySelector('.search-container p');
-// const locationList = document.querySelector('.search-results');
 
 const currentLocation = document.querySelector('#currentLocation');
 const currentTemp = document.querySelector('#currentTemp');
@@ -44,7 +43,6 @@ async function fetchForecastData(location) {
 async function handleSearchInput() {
     try {
         const query = document.querySelector('input').value;
-        console.log(query);
         const data1 = await fetchWeatherData(query);
         const data2 = await fetchForecastData(query);
         displayWeatherDetails(data1);
