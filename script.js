@@ -6,7 +6,7 @@ const weatherContainer = document.querySelector('.weather-details');
 const searchInput = document.querySelector('.search-bar input');
 const searchButton = document.querySelector('#search-button');
 const searchBarInfo = document.querySelector('.search-container p');
-const locationList = document.querySelector('.search-results');
+// const locationList = document.querySelector('.search-results');
 
 const currentLocation = document.querySelector('#currentLocation');
 const currentTemp = document.querySelector('#currentTemp');
@@ -24,37 +24,6 @@ const updateTime = document.querySelector('#updateTime');
 // OpenWeatherMap API Key
 const apiKey = '0d501c392d1a1e67d7c5de08391f719a';
 
-// Function to search locations upon input
-async function searchLocation() {
-    const searchInput = document.querySelector('input').value;
-
-    try {
-        const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchInput}&limit=9&appid=${apiKey}`);
-        const data = await response.json();
-        
-        locationList.innerHTML = '';
-
-        if (data.length == 0) {
-            searchBarInfo.innerHTML = 'No Locations found';
-            searchBarInfo.style.display = 'block';
-            locationList.style.display = 'none';
-        } else {
-            searchBarInfo.style.display = 'none';
-            locationList.style.display = 'grid';
-            data.forEach(location => {
-                const listItem = document.createElement('li');
-                listItem.textContent = `${location.name}, ${location.state}, ${location.country}`;
-                listItem.addEventListener('click', () => handleSearchInput(location.name));
-                locationList.appendChild(listItem);
-            });
-        }
-    } catch (error) {
-        console.log('Error fetching locations data:', error);
-        searchBarInfo.innerHTML = 'Location not available';
-        searchBarInfo.style.display = 'block';
-    }
-}
-
 // Function to fetch Current Weather data
 async function fetchWeatherData(location) {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`;
@@ -71,17 +40,18 @@ async function fetchForecastData(location) {
     return data;
 }
 
-// Function to control overall data fetching
-async function handleSearchInput(query) {
+// Function to handle user input and overall data fetching
+async function handleSearchInput() {
     try {
+        const query = document.querySelector('input').value;
         console.log(query);
         const data1 = await fetchWeatherData(query);
         const data2 = await fetchForecastData(query);
         displayWeatherDetails(data1);
         displayForecastDetails(data2);
     } catch (error) {
-        console.log('Error fetching weather data:', error);
-        searchBarInfo.innerHTML = 'Error in fetching weather data';
+        console.log('Location not found:', error);
+        searchBarInfo.innerHTML = 'Location not available, please enter another one!';
         searchBarInfo.style.display = 'block';
     }
 }
@@ -112,7 +82,7 @@ function displayWeatherDetails(weatherData) {
 
     tempDesc.innerHTML = `The high will be ${Math.round(weatherData.main.temp_max)}°C, the low will be ${Math.round(weatherData.main.temp_min)}°C.`;
 
-    searchContainer.style.padding = '20px 0px 40px 0px';
+    searchContainer.style.padding = '0px 0px 0px 0px';
     searchContainer.style.height = 'auto';
     weatherContainer.style.display = 'block';
     mainTitle.style.display = 'none';
@@ -149,9 +119,9 @@ function degreesToDirection(degrees) {
 }
 
 // Event Listener
-searchButton.addEventListener('click',searchLocation);
+searchButton.addEventListener('click',handleSearchInput);
 searchInput.addEventListener("keydown", function (e) {
     if (e.code === "Enter") {
-        searchLocation();
+        handleSearchInput();
     }
 });
