@@ -21,7 +21,7 @@ const tempDesc = document.querySelector('#tempDesc');
 const updateTime = document.querySelector('#updateTime');
 
 // OpenWeatherMap API Key
-const apiKey = '0d501c392d1a1e67d7c5de08391f719a';
+const apiKey = '';
 
 // Function to fetch Current Weather data
 async function fetchWeatherData(location) {
